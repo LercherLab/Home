@@ -9,20 +9,21 @@
 ================================================================================
   README — PLAIN LANGUAGE GUIDE FOR NON-CODERS
 ================================================================================
-  IMAGE FILES NEEDED — put these inside an "images" folder next to this file
+  This is the ENTIRE Lercher Lab website in one file.
 
+  --------------------------------------------------------------------------
+  IMAGE FILES NEEDED — put these inside an "images" folder next to this file
+  --------------------------------------------------------------------------
   Filename                      | Where it's used      | IDEAL ASPECT RATIO
   -------------------------------|----------------------|----------------------
-  images/banner.jpg              | Homepage hero banner  | ROUGHLY SQUARE-ISH,
-                                  |                       | actually WIDE: 4:3
-                                  |                       | (e.g. 1600x1200px).
-                                  |                       | NOTE: current banner
-                                  |                       | box is set to 4:3 --
-                                  |                       | not a typical wide
-                                  |                       | banner shape, more
-                                  |                       | boxy. Use a photo that
-                                  |                       | isn't too tall/portrait
-                                  |                       | or key parts may crop.
+  images/banner.jpg              | Homepage hero banner  | WIDE: 21:9 or 16:9
+                                  |                       | (e.g. 2400x1000px or
+                                  |                       | 1920x1080px). Use a
+                                  |                       | landscape photo (lab
+                                  |                       | group, bench, building).
+                                  |                       | Avoid portrait/tall photos
+                                  |                       | -- they will be cropped
+                                  |                       | heavily on top/bottom.
   -------------------------------|----------------------|----------------------
   images/alexander-lercher.jpg   | Team card photo       | SQUARE: 1:1
   images/hannah-simonis.jpg      | Team card photo       | (e.g. 800x800px).
@@ -30,18 +31,17 @@
   -------------------------------|----------------------|----------------------
   images/logo-chs.jpg            | Funding logo          | ANY ratio is fine.
   images/logo-heidelberg.jpg     | Institute logo        | Logos are NEVER cropped
-                                  |                       | or stretched.
+                                  |                       | or stretched (they use
+                                  |                       | object-contain).
   --------------------------------------------------------------------------
   COLOR PALETTE USED ON THIS SITE
   --------------------------------------------------------------------------
-  #BF765E  — Main accent (buttons, links, icons, section underlines)
+  #BF765E  — Main accent (buttons, links, icons, underlines)
   #FCFBF8  — Main background (page background)
-  #F3F2F1  — Slightly darker background (used for highlight sections/cards)
-  #897F9B  — Secondary accent (subtle highlights, alternating sections)
-  #EBD182  — Tertiary highlight (small accents, hover states)
+  #F3F2F1  — Slightly darker background (highlight sections/cards)
+  #897F9B  — Secondary accent (footer, subtle highlights)
+  #EBD182  — Reserved tertiary accent (available for future use)
   Grayscale — Used for most body text for readability
-  --------------------------------------------------------------------------
-  FONT: Tahoma (system font, no download needed, works on all computers)
   --------------------------------------------------------------------------
 -->
 
@@ -80,9 +80,9 @@
 
 <!-- ============================== HERO / BANNER ============================== -->
 <section id="home" class="pt-16">
-  <div class="relative w-full aspect-[4/3] md:aspect-[16/7] overflow-hidden bg-[#F3F2F1]">
-    <!-- BANNER IMAGE: ideal ratio ~4:3 as currently sized. See README above. -->
-    <img src="images/banner.jpg" onerror="this.onerror=null;this.src='https://placehold.co/1600x1200/897F9B/FCFBF8?text=Lercher+Lab';"
+  <div class="relative w-full aspect-[21/9] overflow-hidden bg-[#F3F2F1]">
+    <!-- BANNER IMAGE: ideal ratio 21:9 or 16:9. See README above. -->
+    <img src="images/banner.jpg" onerror="this.onerror=null;this.src='https://placehold.co/2400x1000/897F9B/FCFBF8?text=Lercher+Lab';"
          alt="Lercher Lab banner" class="w-full h-full object-cover">
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-16">
       <h1 class="text-white text-3xl md:text-5xl font-bold max-w-3xl leading-tight">
@@ -111,39 +111,38 @@
 
 <!-- ============================== RESEARCH SECTION ============================== -->
 <section id="research" class="py-20 px-6 bg-[#FCFBF8]">
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-4xl mx-auto">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Research</h2>
     <div class="w-20 h-1 bg-[#BF765E] mx-auto mb-16 rounded-full"></div>
 
-    <div class="grid md:grid-cols-2 gap-8 items-stretch">
-      <!-- THE PROBLEM -->
-      <div class="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-[#BF765E]"></span> The Problem
-        </h3>
-        <p class="text-gray-600 leading-relaxed text-[15px]">
-          Immune cells are constantly exposed to a barrage of inflammatory signals — cytokines,
-          microbial products, metabolic cues — often simultaneously and repeatedly over time.
-          Yet we still understand very little about how cells integrate these combinatorial
-          signals into coherent decisions, or how prior inflammatory encounters leave lasting
-          imprints that reshape future responses. This "inflammatory memory" may underlie both
-          protective immunity and maladaptive chronic disease, but the molecular rules governing
-          it remain largely unknown.
-        </p>
-      </div>
+    <!-- THE PROBLEM -->
+    <div class="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm mb-8">
+      <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#BF765E]"></span> The Problem
+      </h3>
+      <p class="text-gray-600 leading-relaxed">
+        Immune cells are constantly exposed to a barrage of inflammatory signals — cytokines,
+        microbial products, metabolic cues — often simultaneously and repeatedly over time.
+        Yet we still understand very little about how cells integrate these combinatorial
+        signals into coherent decisions, or how prior inflammatory encounters leave lasting
+        imprints that reshape future responses. This "inflammatory memory" may underlie both
+        protective immunity and maladaptive chronic disease, but the molecular rules governing
+        it remain largely unknown.
+      </p>
+    </div>
 
-      <!-- THE APPROACH -->
-      <div class="bg-[#F3F2F1] border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-center">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-[#897F9B]"></span> The Approach
-        </h3>
-        <p class="text-gray-600 leading-relaxed text-[15px]">
-          We combine multi-omic profiling, functional perturbation, and quantitative modeling to
-          dissect how immune cells process combinations of inflammatory signals. Using in vitro
-          and in vivo systems, we track how signal integration shapes cell states — and persists
-          as memory — to identify the molecular circuits that could be targeted therapeutically.
-        </p>
-      </div>
+    <!-- THE APPROACH -->
+    <div class="bg-[#F3F2F1] border border-gray-100 rounded-2xl p-8 shadow-sm">
+      <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#897F9B]"></span> The Approach
+      </h3>
+      <p class="text-gray-600 leading-relaxed">
+        We combine multi-omic profiling, functional perturbation, and quantitative modeling to
+        dissect how immune cells process combinations of inflammatory signals. Using in vitro
+        and in vivo systems, we track how signal integration shapes cell states — and persists
+        as memory — allowing us to identify the molecular circuits that could be targeted
+        therapeutically in chronic inflammatory disease.
+      </p>
     </div>
 
     <!-- INDIVIDUAL PROJECTS PLACEHOLDER -->
@@ -213,6 +212,7 @@
       Im Neuenheimer Feld 344<br>
       69120 Heidelberg, Germany
     </p>
+    <!-- Social/LinkedIn links can be added here later -->
   </div>
 </section>
 
