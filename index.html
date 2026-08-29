@@ -1,236 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lercher Lab | Inflammatory Signal Integration and Inflammatory Memory</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lercher Lab — Inflammatory Signal Integration and Inflammatory Memory">
+  <title>Lercher Lab | Inflammatory Signal Integration and Inflammatory Memory</title>
 
-<!--
-================================================================================
-  README — PLAIN LANGUAGE GUIDE FOR NON-CODERS
-================================================================================
-  This is the ENTIRE Lercher Lab website in one file.
+  <!--
+    README FOR LAB MEMBERS
+    1. EDIT TEXT: Find the words you want to change between HTML tags and replace them. Keep the tags.
+    2. SWAP IMAGES: Put your own files in the images/ folder using these filenames:
+       images/banner.jpg, images/logo-chs.jpg, images/logo-heidelberg.jpg,
+       images/alexander-lercher.jpg, images/hannah-simonis.jpg
+       The page uses these local filenames first. If a file is not there yet, a placeholder appears automatically.
+    3. ADD A TEAM MEMBER: Copy one member card block inside the team grid, then edit the name, role, bio,
+       and image filename. A reminder is also placed beside the team grid in the code.
+    4. PUBLISH: GitHub Pages needs this index.html file and the images folder pushed to your repository.
+       Enable Pages on the main branch in your repository settings.
+  -->
 
-  --------------------------------------------------------------------------
-  IMAGE FILES NEEDED — put these inside an "images" folder next to this file
-  --------------------------------------------------------------------------
-  Filename                      | Where it's used      | IDEAL ASPECT RATIO
-  -------------------------------|----------------------|----------------------
-  images/banner.jpg              | Homepage hero banner  | WIDE: 21:9 or 16:9
-                                  |                       | (e.g. 2400x1000px or
-                                  |                       | 1920x1080px). Use a
-                                  |                       | landscape photo (lab
-                                  |                       | group, bench, building).
-                                  |                       | Avoid portrait/tall photos
-                                  |                       | -- they will be cropped
-                                  |                       | heavily on top/bottom.
-  -------------------------------|----------------------|----------------------
-  images/alexander-lercher.jpg   | Team card photo       | SQUARE: 1:1
-  images/hannah-simonis.jpg      | Team card photo       | (e.g. 800x800px).
-                                  |                       | Centered headshot.
-  -------------------------------|----------------------|----------------------
-  images/logo-chs.jpg            | Funding logo          | ANY ratio is fine.
-  images/logo-heidelberg.jpg     | Institute logo        | Logos are NEVER cropped
-                                  |                       | or stretched (they use
-                                  |                       | object-contain).
-  --------------------------------------------------------------------------
-  COLOR PALETTE USED ON THIS SITE
-  --------------------------------------------------------------------------
-  #BF765E  — Main accent (buttons, links, icons, underlines)
-  #FCFBF8  — Main background (page background)
-  #F3F2F1  — Slightly darker background (highlight sections/cards)
-  #897F9B  — Secondary accent (footer, subtle highlights)
-  #EBD182  — Reserved tertiary accent (available for future use)
-  Grayscale — Used for most body text for readability
-  --------------------------------------------------------------------------
--->
-
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  * { font-family: Tahoma, Verdana, Geneva, sans-serif; }
-</style>
+  <!-- Google Fonts: a warm editorial serif for headings paired with a clean sans-serif body font. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ink: '#332b2d', maroon: '#7a2e3a', cream: '#fbf8f3', sage: '#dbe7df', sky: '#dbeaf0', blush: '#f5e9e3' },
+          fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Fraunces', 'serif'] }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root { --maroon: #7a2e3a; --ink: #332b2d; --cream: #fbf8f3; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; }
+    .display { font-family: 'Fraunces', serif; }
+    .grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E"); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .card-lift { transition: transform .3s ease, box-shadow .3s ease; }
+    .card-lift:hover { transform: translateY(-5px); box-shadow: 0 18px 35px rgba(93, 48, 55, .12); }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; left: 0; bottom: -7px; width: 0; height: 2px; background: var(--maroon); transition: width .25s ease; }
+    .nav-link:hover::after, .nav-link:focus-visible::after { width: 100%; }
+  </style>
 </head>
-<body class="bg-[#FCFBF8] text-gray-700">
-
-<!-- ============================== NAVIGATION ============================== -->
-<nav class="fixed w-full bg-[#FCFBF8]/95 backdrop-blur-sm shadow-sm z-50">
-  <div class="max-w-6xl mx-auto px-6 flex justify-between items-center h-16">
-    <a href="#home" class="font-bold text-lg text-[#BF765E]">Lercher Lab</a>
-    <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-      <a href="#home" class="hover:text-[#BF765E] transition">Home</a>
-      <a href="#research" class="hover:text-[#BF765E] transition">Research</a>
-      <a href="#team" class="hover:text-[#BF765E] transition">Team</a>
-      <a href="#funding" class="hover:text-[#BF765E] transition">Funding</a>
-      <a href="#contact" class="hover:text-[#BF765E] transition">Contact</a>
-    </div>
-    <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-  </div>
-  <div id="mobile-menu" class="hidden md:hidden bg-[#FCFBF8] border-t border-gray-100 px-6 py-4 space-y-3 text-gray-700 text-sm font-medium">
-    <a href="#home" class="block hover:text-[#BF765E]">Home</a>
-    <a href="#research" class="block hover:text-[#BF765E]">Research</a>
-    <a href="#team" class="block hover:text-[#BF765E]">Team</a>
-    <a href="#funding" class="block hover:text-[#BF765E]">Funding</a>
-    <a href="#contact" class="block hover:text-[#BF765E]">Contact</a>
-  </div>
-</nav>
-
-<!-- ============================== HERO / BANNER ============================== -->
-<section id="home" class="pt-16">
-  <div class="relative w-full aspect-[21/9] overflow-hidden bg-[#F3F2F1]">
-    <!-- BANNER IMAGE: ideal ratio 21:9 or 16:9. See README above. -->
-    <img src="images/banner.jpg" onerror="this.onerror=null;this.src='https://placehold.co/2400x1000/897F9B/FCFBF8?text=Lercher+Lab';"
-         alt="Lercher Lab banner" class="w-full h-full object-cover">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-16">
-      <h1 class="text-white text-3xl md:text-5xl font-bold max-w-3xl leading-tight">
-        Lercher Lab
-      </h1>
-      <p class="text-white/90 text-lg md:text-2xl mt-2 max-w-2xl">
-        Inflammatory Signal Integration and Inflammatory Memory
-      </p>
-    </div>
-  </div>
-
-  <!-- TEASER -->
-  <div class="max-w-4xl mx-auto px-6 py-16 text-center">
-    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Our Approach</h2>
-    <p class="text-lg leading-relaxed text-gray-600">
-      We study how immune cells integrate diverse inflammatory signals over time and translate
-      them into lasting functional states. By combining systems-level profiling with functional
-      immunology, we aim to uncover the molecular logic of inflammatory memory — and how it
-      shapes health and disease.
-    </p>
-    <a href="#research" class="inline-block mt-8 px-6 py-3 bg-[#BF765E] text-white rounded-full font-medium hover:bg-[#a8624c] transition">
-      Learn more about our research
-    </a>
-  </div>
-</section>
-
-<!-- ============================== RESEARCH SECTION ============================== -->
-<section id="research" class="py-20 px-6 bg-[#FCFBF8]">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Research</h2>
-    <div class="w-20 h-1 bg-[#BF765E] mx-auto mb-16 rounded-full"></div>
-
-    <!-- THE PROBLEM -->
-    <div class="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm mb-8">
-      <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#BF765E]"></span> The Problem
-      </h3>
-      <p class="text-gray-600 leading-relaxed">
-        Immune cells are constantly exposed to a barrage of inflammatory signals — cytokines,
-        microbial products, metabolic cues — often simultaneously and repeatedly over time.
-        Yet we still understand very little about how cells integrate these combinatorial
-        signals into coherent decisions, or how prior inflammatory encounters leave lasting
-        imprints that reshape future responses. This "inflammatory memory" may underlie both
-        protective immunity and maladaptive chronic disease, but the molecular rules governing
-        it remain largely unknown.
-      </p>
-    </div>
-
-    <!-- THE APPROACH -->
-    <div class="bg-[#F3F2F1] border border-gray-100 rounded-2xl p-8 shadow-sm">
-      <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#897F9B]"></span> The Approach
-      </h3>
-      <p class="text-gray-600 leading-relaxed">
-        We combine multi-omic profiling, functional perturbation, and quantitative modeling to
-        dissect how immune cells process combinations of inflammatory signals. Using in vitro
-        and in vivo systems, we track how signal integration shapes cell states — and persists
-        as memory — allowing us to identify the molecular circuits that could be targeted
-        therapeutically in chronic inflammatory disease.
-      </p>
-    </div>
-
-    <!-- INDIVIDUAL PROJECTS PLACEHOLDER -->
-    <div class="mt-16 text-center">
-      <p class="text-gray-500 italic">Individual project pages coming soon!</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================== TEAM SECTION ============================== -->
-<section id="team" class="py-20 px-6 bg-[#F3F2F1]">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Team</h2>
-    <div class="w-20 h-1 bg-[#BF765E] mx-auto mb-16 rounded-full"></div>
-
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-
-      <!-- PI -->
-      <div class="bg-white rounded-2xl shadow-sm overflow-hidden text-center pb-6">
-        <img src="images/alexander-lercher.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x800/BF765E/FCFBF8?text=A.+Lercher';"
-             alt="Alexander Lercher" class="w-full aspect-square object-cover">
-        <h3 class="mt-4 font-bold text-gray-800">Alexander Lercher</h3>
-        <p class="text-sm text-[#BF765E] font-medium">Principal Investigator</p>
-      </div>
-
-      <!-- PHD STUDENT -->
-      <div class="bg-white rounded-2xl shadow-sm overflow-hidden text-center pb-6">
-        <img src="images/hannah-simonis.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x800/897F9B/FCFBF8?text=H.+Simonis';"
-             alt="Hannah Simonis" class="w-full aspect-square object-cover">
-        <h3 class="mt-4 font-bold text-gray-800">Hannah Simonis</h3>
-        <p class="text-sm text-[#BF765E] font-medium">PhD Student</p>
-        <p class="text-sm text-gray-500 italic mt-2 px-4">Coming soon!</p>
-      </div>
-
-      <!-- ADD MORE TEAM MEMBERS BY COPYING THE BLOCK ABOVE -->
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================== FUNDING SECTION ============================== -->
-<section id="funding" class="py-20 px-6 bg-[#FCFBF8]">
-  <div class="max-w-4xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Funding & Affiliation</h2>
-    <div class="w-20 h-1 bg-[#BF765E] mx-auto mb-16 rounded-full"></div>
-    <div class="flex flex-wrap justify-center items-center gap-12">
-      <img src="images/logo-chs.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x150/ffffff/BF765E?text=CHS+Stiftung';"
-           alt="CHS Stiftung" class="h-24 object-contain bg-white rounded-xl p-3 shadow-sm">
-      <img src="images/logo-heidelberg.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x150/ffffff/897F9B?text=Heidelberg+University';"
-           alt="Heidelberg University Medical Faculty" class="h-24 object-contain bg-white rounded-xl p-3 shadow-sm">
-    </div>
-  </div>
-</section>
-
-<!-- ============================== CONTACT SECTION ============================== -->
-<section id="contact" class="py-24 px-6 bg-[#F3F2F1]">
-  <div class="max-w-3xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contact</h2>
-    <div class="w-20 h-1 bg-[#BF765E] mx-auto mb-12 rounded-full"></div>
-    <p class="text-lg text-gray-700 mb-2">
-      <a href="mailto:alexander.lercher@uni-heidelberg.de" class="text-[#BF765E] font-medium hover:underline">
-        alexander.lercher@uni-heidelberg.de
+<body class="grain antialiased">
+  <!-- Sticky navigation: edit link labels or destinations here if the page grows. -->
+  <header class="sticky top-0 z-50 border-b border-[#e7ddd7]/90 bg-[#fbf8f3]/90 backdrop-blur-md">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10" aria-label="Main navigation">
+      <a href="#home" class="group leading-tight" aria-label="Lercher Lab home">
+        <span class="display block text-xl font-semibold tracking-tight text-maroon">Lercher Lab</span>
+        <span class="hidden text-[10px] font-semibold uppercase tracking-[.16em] text-[#8c7b7b] sm:block">Inflammatory Signal Integration and Inflammatory Memory</span>
       </a>
-    </p>
-    <p class="text-gray-600 leading-relaxed">
-      Center for Integrative Infectious Disease Research (CIID)<br>
-      Im Neuenheimer Feld 344<br>
-      69120 Heidelberg, Germany
-    </p>
-    <!-- Social/LinkedIn links can be added here later -->
-  </div>
-</section>
+      <div class="hidden items-center gap-8 text-sm font-semibold text-[#66575a] md:flex">
+        <a class="nav-link hover:text-maroon" href="#home">Home</a>
+        <a class="nav-link hover:text-maroon" href="#research">Research</a>
+        <a class="nav-link hover:text-maroon" href="#team">Team</a>
+        <a class="nav-link hover:text-maroon" href="#contact">Contact</a>
+      </div>
+      <button id="menuButton" class="rounded-lg p-2 text-maroon md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobileMenu" class="hidden border-t border-[#e7ddd7] px-6 pb-5 pt-3 md:hidden">
+      <div class="flex flex-col gap-4 text-sm font-semibold text-[#66575a]"><a href="#home">Home</a><a href="#research">Research</a><a href="#team">Team</a><a href="#contact">Contact</a></div>
+    </div>
+  </header>
 
-<!-- ============================== FOOTER ============================== -->
-<footer class="py-8 px-6 bg-[#897F9B] text-center text-white/80 text-sm">
-  <p>&copy; 2026 Lercher Lab, Heidelberg University. All rights reserved.</p>
-</footer>
+  <main>
+    <!-- HERO: replace the local image file to use a real lab photograph. -->
+    <section id="home" class="relative overflow-hidden border-b border-[#e7ddd7]">
+      <div class="absolute -right-32 -top-24 h-96 w-96 rounded-full bg-sage/60 blur-3xl"></div>
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-6 py-14 lg:grid-cols-[1.05fr_.95fr] lg:px-10 lg:py-20">
+        <div class="relative z-10 reveal">
+          <h1 class="display max-w-2xl text-5xl leading-[.98] tracking-[-.035em] text-maroon sm:text-6xl lg:text-7xl">Lercher Lab</h1>
+          <p class="mt-5 max-w-xl text-lg leading-8 text-[#66575a]">Inflammatory Signal Integration and Inflammatory Memory</p>
+          <p class="mt-7 max-w-xl text-base leading-7 text-[#66575a]">We take a holistic approach to decipher inflammatory signal integration and epigenetic memory. Using model systems that reflect real pathogen encounters, we seek fundamental principles of immunity to enable new therapeutics and boost pandemic preparedness.</p>
+          <a href="#research" class="mt-8 inline-flex items-center gap-3 rounded-full bg-maroon px-6 py-3 text-sm font-bold text-white shadow-lg shadow-maroon/15 transition hover:-translate-y-0.5 hover:bg-[#642631] focus:outline-none focus:ring-2 focus:ring-maroon focus:ring-offset-2">Learn more <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="relative reveal lg:pl-8">
+          <div class="absolute -inset-3 rounded-[2rem] border border-maroon/20"></div>
+          <!-- TO UPDATE BANNER IMAGE: replace images/banner.jpg in your GitHub repo with your own image, same filename. The placeholder URL is used automatically if it is missing. -->
+          <!-- Primary image path for the banner: images/banner.jpg. Fallback: https://placehold.co/1600x600/f5e9e3/7a2e3a?text=Lab+Banner+Photo -->
+          <img src="images/banner.jpg" onerror="this.onerror=null;this.src='https://placehold.co/1600x600/f5e9e3/7a2e3a?text=Lab+Banner+Photo';" alt="Lab Banner Photo" class="relative h-[280px] w-full rounded-[1.7rem] object-cover shadow-2xl shadow-[#7a2e3a]/10 sm:h-[380px] lg:h-[430px]">
+                  </div>
+      </div>
+    </section>
 
-<script>
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-  document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-  });
-</script>
+    <!-- RESEARCH: the long-form scientific text is kept verbatim below. -->
+    <section id="research" class="mx-auto max-w-7xl scroll-mt-24 px-6 py-20 lg:px-10 lg:py-28">
+      <div class="mb-14 reveal"><h2 class="display text-4xl text-maroon sm:text-5xl">Research</h2></div>
+      <div class="grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
+        <div class="reveal"><h3 class="display mb-4 text-2xl text-maroon">The Problem</h3><p class="leading-8 text-[#66575a]">Humans encounter a plethora of microbes daily. Innate immune cells are at the first responders to fend off disease caused by pathogenic microbes but can also cause life-threatening hyperinflammatory dysregulation. While pathogen-associated molecular patterns and/or cytokines are prime inducers of inflammatory responses, cell intrinsic and extrinsic factors including cell identity, tissue environment and even diet influence innate responses. Another regulatory layer of innate immune responses are past inflammatory encounters that result in durable epigenetic memory. This innate immune memory impacts secondary inflammatory responses and thereby affects disease pathology. There is a significant gap in our understanding of how cells integrate a myriad of immunological and/or environmental cues to mount adequate responses and elicit memory. Mapping the underlying molecular networks governing this complex yet fundamental cellular ability is a major frontier in biomedical research, with the potential to reveal novel concepts of immune regulation that will inform therapeutic strategies.</p></div>
+        <div class="reveal rounded-[2rem] bg-sage/70 p-7 sm:p-10"><h3 class="display mb-4 text-2xl text-maroon">The Approach</h3><p class="leading-8 text-[#66575a]">In the Lercher lab, we take a holistic approach to decipher the black box of inflammatory signal integration and resulting epigenetic memory. We employ tractable primary cell culture systems and complementary murine infection models to study real-world pathogen encounters. We utilize next generation sequencing, real-time imaging, genetic engineering and immune profiling to build a framework of complex inflammatory signal integration and cell-cell communication networks across tissues in health and disease. Our overarching goal is to uncover fundamental principles of immunity that underly disease development, progression and resolution to enable new therapeutic approaches and boost pandemic preparedness.</p></div>
+      </div>
+      <div class="mt-16 border-t border-[#d9ccc6] pt-12 reveal"><h3 class="display mb-7 text-2xl text-maroon">The Questions</h3><ul class="grid gap-4 md:grid-cols-2"><li class="flex gap-4 border-b border-[#e7ddd7] pb-4 leading-7 text-[#66575a]"><span class="font-bold text-maroon">01</span>How do cells integrate inflammatory cues to mount adequate immune responses?</li><li class="flex gap-4 border-b border-[#e7ddd7] pb-4 leading-7 text-[#66575a]"><span class="font-bold text-maroon">02</span>What are the determinants of cell-type or tissue-specific immune responses?</li><li class="flex gap-4 border-b border-[#e7ddd7] pb-4 leading-7 text-[#66575a]"><span class="font-bold text-maroon">03</span>How do innate immune responses lead to durable epigenetic memory?</li><li class="flex gap-4 border-b border-[#e7ddd7] pb-4 leading-7 text-[#66575a]"><span class="font-bold text-maroon">04</span>Which cellular and cross-organ communication networks shape innate immunity and memory?</li><li class="flex gap-4 border-b border-[#e7ddd7] pb-4 leading-7 text-[#66575a] md:col-span-2"><span class="font-bold text-maroon">05</span>Can we use synthetic immunology to build circuits that control complex immune responses?</li></ul></div>
 
+      <!-- INDIVIDUAL PROJECT CARDS SECTION — TO BE ADDED LATER. When ready, add project cards here, each clickable to open a modal with detailed text + image. Placeholder projects can go here as example markup (commented out) showing the intended pattern (card grid -> click -> modal with image + long text), fully commented out / not rendered, so it's easy to activate later.
+      Example pattern (uncomment and replicate):
+      <div class="grid gap-6 md:grid-cols-2">
+        <button class="project-card" data-modal="projectModal">Project title</button>
+      </div>
+      <dialog id="projectModal"><img src="images/project-example.jpg" onerror="this.onerror=null;this.src='https://placehold.co/900x500/f5e9e3/7a2e3a?text=Project+Image';" alt="Project image"><h3>Project title</h3><p>Long expandable project text goes here.</p><button onclick="this.closest('dialog').close()">Close</button></dialog>
+      <script>document.querySelectorAll('[data-modal]').forEach(card => card.addEventListener('click', () => document.getElementById(card.dataset.modal).showModal()));</script>
+      END OF COMMENTED EXAMPLE. -->
+    </section>
+
+    <!-- TEAM: copy a member card block to add more people. -->
+    <section id="team" class="scroll-mt-24 bg-[#f1eee8] px-6 py-20 lg:px-10 lg:py-28"><div class="mx-auto max-w-7xl"><div class="mb-14 reveal"><h2 class="display text-4xl text-maroon sm:text-5xl">Team</h2></div>
+      <!-- TO ADD MORE TEAM MEMBERS: copy one member card block (photo + name + role + bio) and paste it inside the team grid, then edit the text and swap images/[name].jpg -->
+      <div class="grid gap-7 md:grid-cols-2">
+        <article class="card-lift reveal rounded-[1.7rem] bg-white p-7 shadow-sm"><div class="flex flex-col gap-6 sm:flex-row sm:items-start"><img src="images/alexander-lercher.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/f5e9e3/7a2e3a?text=AL';" alt="Alexander Lercher" class="h-28 w-28 shrink-0 rounded-full object-cover ring-4 ring-blush"><div><h3 class="display text-2xl text-maroon">Alexander Lercher</h3><p class="mt-1 text-sm font-bold uppercase tracking-[.14em] text-[#8c7b7b]">Group Leader</p></div></div><p class="mt-6 leading-7 text-[#66575a]">Alex is from Austria, he moved to Heidelberg University to start his own lab at the Center for Integrative Infectious Disease Research (CIID) following his postdoc in the lab of Charlie Rice at Rockefeller University in New York working on respiratory viruses and inflammatory memory. Before that, he did his PhD at CeMM in Vienna in the lab of Andreas Bergthaler, where he studied how chronic viral hepatitis reprograms liver metabolism and influences antiviral immunity.</p></article>
+        <article class="card-lift reveal rounded-[1.7rem] bg-white p-7 shadow-sm"><div class="flex flex-col gap-6 sm:flex-row sm:items-start"><img src="images/hannah-simonis.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/f5e9e3/7a2e3a?text=HS';" alt="Hannah Simonis" class="h-28 w-28 shrink-0 rounded-full object-cover ring-4 ring-blush"><div><h3 class="display text-2xl text-maroon">Hannah Simonis</h3><p class="mt-1 text-sm font-bold uppercase tracking-[.14em] text-[#8c7b7b]">PhD Student</p></div></div><!-- PLACEHOLDER BIO: update this text when Hannah's biography is ready. --><p class="mt-6 leading-7 text-[#66575a]">text placeholder.</p></article>
+      </div>
+    </div></section>
+
+    <!-- FUNDING & AFFILIATION: replace logo files in the images folder when ready. -->
+    <section class="border-b border-[#e7ddd7] px-6 py-14 lg:px-10"><div class="mx-auto max-w-7xl"><p class="mb-7 text-center text-xs font-bold uppercase tracking-[.2em] text-[#8c7b7b]">Funding &amp; Affiliation</p><div class="flex flex-col items-center justify-center gap-6 sm:flex-row"><div class="flex h-24 w-52 items-center justify-center rounded-xl bg-white p-3 grayscale opacity-70"><img src="images/logo-chs.jpg" onerror="this.onerror=null;this.src='https://placehold.co/200x100/f5e9e3/7a2e3a?text=CHS+Stiftung';" alt="CHS Stiftung" class="max-h-full max-w-full object-contain"></div><div class="flex h-24 w-52 items-center justify-center rounded-xl bg-white p-3 grayscale opacity-70"><img src="images/logo-heidelberg.jpg" onerror="this.onerror=null;this.src='https://placehold.co/200x100/f5e9e3/7a2e3a?text=Heidelberg+University';" alt="Heidelberg University Medical Faculty" class="max-h-full max-w-full object-contain"></div></div></div></section>
+
+    <!-- CONTACT: update or add social links at the marked placeholder. -->
+    <section id="contact" class="scroll-mt-24 px-6 py-20 lg:px-10 lg:py-28"><div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.75fr_1.25fr] lg:items-end"><div class="reveal"><h2 class="display text-5xl text-maroon">Contact</h2></div><div class="reveal border-l-2 border-maroon pl-7"><p class="text-sm font-bold uppercase tracking-[.14em] text-[#8c7b7b]">Email</p><a href="/cdn-cgi/l/email-protection#7819141d0019161c1d0a56141d0a1b101d0a380d161155101d111c1d141a1d0a1f561c1d" class="mt-2 block break-all text-lg font-semibold text-maroon hover:underline"><span class="__cf_email__" data-cfemail="a5c4c9c0ddc4cbc1c0d78bc9c0d7c6cdc0d7e5d0cbcc88cdc0ccc1c0c9c7c0d7c28bc1c0">[email&#160;protected]</span></a><p class="mt-8 text-sm font-bold uppercase tracking-[.14em] text-[#8c7b7b]">Address</p><p class="mt-2 leading-7 text-[#66575a]">CIID, Im Neuenheimer Feld 344, 69120 Heidelberg</p><!-- SOCIAL MEDIA LINKS — TO BE ADDED LATER (e.g. LinkedIn, Twitter/X, Bluesky). Insert icon links here when ready. --></div></div></section>
+  </main>
+
+  <!-- Footer: update the year and note here when the site content changes. -->
+  <footer class="bg-maroon px-6 py-7 text-sm text-[#f9eae5] lg:px-10"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-2 sm:flex-row"><span>© 2026 Lercher Lab, Heidelberg University</span><span class="text-[#e7c9c4]">Site content last updated: August 29, 2026</span></div></footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Mobile menu: open and close the compact navigation on small screens.
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => { const isOpen = menuButton.getAttribute('aria-expanded') === 'true'; menuButton.setAttribute('aria-expanded', String(!isOpen)); mobileMenu.classList.toggle('hidden'); });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); menuButton.setAttribute('aria-expanded', 'false'); }));
+    // Fade sections into view without a library; content remains visible if this feature is unsupported.
+    const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: 0.12 }) : null;
+    document.querySelectorAll('.reveal').forEach(element => observer ? observer.observe(element) : element.classList.add('visible'));
+  </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5"}' crossorigin="anonymous"></script>
 </body>
 </html>
